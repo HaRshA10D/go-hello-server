@@ -11,6 +11,6 @@ clean:
 	@rm -rf build && mkdir build
 
 # TO RUN THE APP FROM BUILD FOLDER
-run:
+run: build
 	@echo "Running app from build/$(APP)"
-	@"build/$(APP)"
+	@"build/$(APP)" $(CMD)

@@ -1,5 +1,9 @@
 package main
 
+import (
+	"github.com/HaRshA10D/go-hello-server/cmd"
+)
+
 func main() {
-	print("Hello server")
+	cmd.Execute()
 }
