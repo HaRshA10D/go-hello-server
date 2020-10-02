@@ -20,7 +20,10 @@ func Start() {
 }
 
 func pingHandler(w http.ResponseWriter, r *http.Request) {
-	logger.Info("path=ping HTTP request")
+	l := logger.GetLogger().WithFields(map[string]interface{}{
+		"path": "ping",
+	})
+	l.Info("Serving ping")
 	w.WriteHeader(200)
 	w.Write([]byte(`pong`))
 }
