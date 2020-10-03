@@ -2,6 +2,7 @@ package logger
 
 import (
 	"io"
+	"os"
 )
 
 // A good convention to use
@@ -38,7 +39,10 @@ var logger Logger
 
 // Init initializes the logger with config
 func Init(config Config) {
-	logger = newZapLogger(config)
+	hostName, _ := os.Hostname()
+	logger = newZapLogger(config).WithFields(map[string]interface{}{
+		"host": hostName,
+	})
 }
 
 func GetLogger() Logger {

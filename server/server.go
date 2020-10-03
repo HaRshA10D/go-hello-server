@@ -1,22 +1,22 @@
 package server
 
 import (
+	"github.com/HaRshA10D/go-hello-server/config"
 	"github.com/HaRshA10D/go-hello-server/logger"
 	"net/http"
-	"os"
 )
 
 func Start() {
-	// Initialize logger
-	loggerConfig := logger.Config{
-		Level: logger.InfoLevel,
-		Output: os.Stdout,
-	}
-	logger.Init(loggerConfig)
-	logger.Info("Starting server %d", 8080)
+	config.Load()
+	configureLogger()
 
 	http.HandleFunc("/ping", pingHandler)
 	http.ListenAndServe(":9000", nil)
+}
+
+func configureLogger() {
+	logger.Init(*config.Logger())
+	logger.Info("Starting server %d", 8080)
 }
 
 func pingHandler(w http.ResponseWriter, r *http.Request) {
