@@ -17,6 +17,7 @@ type config struct {
 	logger *logger.Config
 }
 
+// Load loads the config from given file
 func Load() {
 	if isLoaded {
 		return

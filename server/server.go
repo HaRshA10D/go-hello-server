@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+// Start starts the http server
 func Start() {
 	config.Load()
 	configureLogger()

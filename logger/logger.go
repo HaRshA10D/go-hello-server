@@ -9,13 +9,19 @@ import (
 // https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels/2031195#2031195
 //
 
+// LogLevel defines levels for logger
 type LogLevel uint8
 
 const (
+	// DebugLevel is the lowest and used to debug issues, not for production
 	DebugLevel LogLevel = iota
+	// InfoLevel is the default level for all events in app
 	InfoLevel
+	// WarnLevel can be used for events that might cause errors
 	WarnLevel
+	// ErrorLevel can be used for errors that needs investigation
 	ErrorLevel
+	// FatalLevel can be used critical failure that needs immediate investigation
 	FatalLevel
 )
 
@@ -45,26 +51,32 @@ func Init(config Config) {
 	})
 }
 
+// GetLogger returns current app's logger
 func GetLogger() Logger {
 	return logger
 }
 
+// Debug logs the message at debug level
 func Debug(msg string, args ...interface{}) {
 	logger.Debug(msg, args...)
 }
 
+// Info logs the message at info level
 func Info(msg string, args ...interface{}) {
 	logger.Info(msg, args...)
 }
 
+// Warn logs the message at warn level
 func Warn(msg string, args ...interface{}) {
 	logger.Warn(msg, args...)
 }
 
+// Error logs the message at error level
 func Error(msg string, args ...interface{}) {
 	logger.Error(msg, args...)
 }
 
+// Fatal logs the message at fatal level
 func Fatal(msg string, args ...interface{}) {
 	logger.Fatal(msg, args...)
 }
