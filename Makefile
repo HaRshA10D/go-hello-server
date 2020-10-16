@@ -1,4 +1,13 @@
 APP=go-hello-server
+ALL_PACKAGES= $(shell go list ./...)
+
+# TO INSTALL EXTERNAL DEPENDENCIES
+setup:
+	@go get -u golang.org/x/lint/golint
+
+# TO RUN LINT
+lint:
+	@golint $(ALL_PACKAGES)
 
 # TO COPY DEV CONFIG
 copy-dev-config:
