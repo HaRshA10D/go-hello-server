@@ -15,6 +15,7 @@ var (
 
 type config struct {
 	logger *logger.Config
+	server ServerConfig
 }
 
 // Load loads the config from given file
@@ -34,11 +35,18 @@ func Load() {
 
 	appConfig = config{
 		logger: getLoggerConfig(),
+		server: getServerConfig(),
 	}
 }
 
 // Logger returns logging configuration
 func Logger() *logger.Config { return appConfig.logger }
+// Server returns http server config
+func Server() ServerConfig { return appConfig.server }
+
+func getServerConfig() ServerConfig {
+	return newServerConfig()
+}
 
 func getLoggerConfig() *logger.Config {
 	logLevel := mustGetString("LOG_LEVEL")
@@ -66,15 +74,4 @@ func parseLogLevel(lvl string) logger.LogLevel {
 		panic(fmt.Sprintf("Logger level mis-configured: %s", lvl))
 	}
 	return logLevel
-}
-
-func mustGetString(key string) string {
-	mustHave(key)
-	return viper.GetString(key)
-}
-
-func mustHave(key string) {
-	if !viper.IsSet(key) {
-		panic(fmt.Sprintf("Config not set for: %s", key))
-	}
 }
