@@ -13,6 +13,8 @@ func Start() {
 	configureLogger()
 
 	http.HandleFunc("/ping", pingHandler)
+	http.HandleFunc("/greeting", greetingHandler)
+
 	port := fmt.Sprintf(":%d", config.Server().Port)
 	http.ListenAndServe(port, nil)
 }
